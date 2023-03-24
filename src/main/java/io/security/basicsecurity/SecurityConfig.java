@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -72,7 +73,8 @@ public class SecurityConfig {
                 .anyRequest().authenticated(); //모든 설정에 인증을 받아야한다
 
         http
-                .formLogin()
+                .formLogin();
+        /*
                 .successHandler(new AuthenticationSuccessHandler() {
                     @Override
                     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
@@ -82,8 +84,8 @@ public class SecurityConfig {
                         response.sendRedirect(redirectUrl);
 
                     }
-                });
-/*
+                })
+
                 .loginPage("/loginPage")
                 .defaultSuccessUrl("/")
                 .failureUrl("/login")
@@ -138,7 +140,7 @@ public class SecurityConfig {
                 .maxSessionsPreventsLogin(true);
 
 
-*/
+
         http
                 .exceptionHandling()
                 .authenticationEntryPoint(new AuthenticationEntryPoint() {
@@ -154,7 +156,8 @@ public class SecurityConfig {
                     }
                 });
 
-
+*/
+        SecurityContextHolder.setStrategyName(SecurityContextHolder.MODE_INHERITABLETHREADLOCAL); //메인스레드와 자식 스레드 까지동일한 securitycontext를 유지
 
 
 
