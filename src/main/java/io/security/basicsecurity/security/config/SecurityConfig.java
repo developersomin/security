@@ -31,7 +31,6 @@ public class SecurityConfig {
 
         UserDetails user = User.builder()
                 .username( "user" )
-//                .password("{noop}1111")
                 .password( password )
                 .roles( "USER" )
                 .build();
